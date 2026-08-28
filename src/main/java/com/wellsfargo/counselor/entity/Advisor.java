@@ -1,43 +1,44 @@
 package com.wellsfargo.counselor.entity;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "advisors")
 public class Advisor {
 
     @Id
-    @GeneratedValue()
-    private long advisorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "advisor_id")
+    private Long advisorId;
 
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    protected Advisor() {
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    }
+    @Column(name = "specialization")
+    private String specialization;
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
+    @Column(name = "hire_data")
+    private LocalDate hireData;
+
+    protected Advisor() {}
+
+    public Advisor(String firstName, String lastName, String email, String phoneNumber, String specialization, LocalDate hireData) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.specialization = specialization;
+        this.hireData = hireData;
     }
 
     public Long getAdvisorId() {
@@ -60,27 +61,35 @@ public class Advisor {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public LocalDate getHireData() {
+        return hireData;
+    }
+
+    public void setHireData(LocalDate hireData) {
+        this.hireData = hireData;
     }
 }
